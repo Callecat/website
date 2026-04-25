@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Calle de Luna Rescue</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Space+Grotesk:wght@600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Supabase client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    window.__supabase = supabase.createClient(
+      'https://jscilpgxwfiugbpdhfmu.supabase.co',
+      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpzY2lscGd4d2ZpdWdicGRoZm11Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzcxNDEzMzksImV4cCI6MjA5MjcxNzMzOX0.4JTBXVrbSo9GEEaJ8VCi5ehNUYKaWwT5OHo8u39X3_s'
+    );
+  </script>
+  <script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+  <script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { background: #FAFAF8; font-family: 'Inter', sans-serif; -webkit-font-smoothing: antialiased; }
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: #F2F0EC; }
+    ::-webkit-scrollbar-thumb { background: #E8B84B; border-radius: 3px; }
+    button, input, textarea, select { font-family: 'Inter', sans-serif; }
+    a { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body>
+  <template id="__bundler_thumbnail" data-bg-color="#F5F4F1">
+    <svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+      <!-- Logo mark: cat on moon -->
+      <circle cx="600" cy="340" r="120" fill="#E8B84B" opacity="0.9"/>
+      <circle cx="640" cy="310" r="90" fill="#F5F4F1"/>
+      <!-- Cat face -->
+      <ellipse cx="600" cy="355" rx="55" ry="50" fill="#0D0D0D"/>
+      <circle cx="583" cy="345" r="7" fill="#F5F4F1"/>
+      <circle cx="617" cy="345" r="7" fill="#F5F4F1"/>
+      <ellipse cx="600" cy="365" rx="10" ry="7" fill="#F5F4F1"/>
+      <!-- Cat ears -->
+      <polygon points="558,318 545,295 572,305" fill="#0D0D0D"/>
+      <polygon points="642,318 655,295 628,305" fill="#0D0D0D"/>
+      <!-- Wordmark -->
+      <text x="600" y="510" fontFamily="serif" fontSize="38" fontWeight="700" fill="#0D0D0D" textAnchor="middle" letterSpacing="4">CALLE DE LUNA</text>
+      <text x="600" y="548" fontFamily="serif" fontSize="20" fill="#C4954A" textAnchor="middle" letterSpacing="6">RESCUE</text>
+    </svg>
+  </template>
+  <div id="root"></div>
+
+  <script>
+    window.CATS = [
+      { id:1, name:'Luna',    age:'2 years',   gender:'Female', color:'Gray tabby',     status:'Available', desc:'Luna is a gentle soul who loves quiet evenings and slow mornings curled on a warm lap.' },
+      { id:2, name:'Mochi',   age:'8 months',  gender:'Female', color:'Cream & white',  status:'Available', desc:'Mochi is endlessly curious and will investigate every corner of your home with great enthusiasm.' },
+      { id:3, name:'Shadow',  age:'3 years',   gender:'Male',   color:'Black',           status:'Available', desc:'Shadow is shy at first, but becomes the most devoted companion once he decides to trust you.' },
+      { id:4, name:'Biscuit', age:'1 year',    gender:'Male',   color:'Orange tabby',   status:'Available', desc:'Biscuit is pure sunshine — loud, playful, and always the first to greet anyone at the door.' },
+      { id:5, name:'Marble',  age:'4 years',   gender:'Female', color:'Black & white',  status:'Pending',   desc:'Marble has survived a lot. She is calm, dignified, and deeply loving to those she trusts.' },
+      { id:6, name:'Noodle',  age:'6 months',  gender:'Male',   color:'Striped tabby',  status:'Available', desc:'Noodle is a tiny tornado of energy who thrives with a playmate or a very patient human.' },
+      { id:7, name:'Cleo',    age:'5 years',   gender:'Female', color:'Tortoiseshell',  status:'Available', desc:'Cleo is the queen of whatever room she inhabits — graceful, opinionated, and entirely wonderful.' },
+      { id:8, name:'Pumpkin', age:'1.5 years', gender:'Male',   color:'Ginger & white', status:'Available', desc:'Pumpkin loves warmth above all else — sunny spots, warm laps, and thick cozy blankets.' },
+    ];
+    window.STATIONS = [
+      { id:'A', label:'Station A – Near School Gate' },
+      { id:'B', label:'Station B – Park Entrance' },
+      { id:'C', label:'Station C – Market Alley' },
+      { id:'D', label:'Station D – Community Garden' },
+      { id:'E', label:'Station E – Back Lane' },
+    ];
+  </script>
+
+  <script type="text/babel" src="public-site-v2.jsx"></script>
+  <script type="text/babel" src="internal-tool-supabase.jsx"></script>
+
+  <script type="text/babel">
+    const { useState, useEffect } = React;
+
+    const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+      "goldAccent": "#E8B84B",
+      "darkBg": "#0F0F0E"
+    }/*EDITMODE-END*/;
+
+    function App() {
+      const [section, setSection] = useState('public');
+      const [page,    setPage]    = useState('home');
+      const [user,    setUser]    = useState(null);
+      const [tweaksOpen, setTweaksOpen] = useState(false);
+
+      useEffect(() => {
+        window.addEventListener('message', (e) => {
+          if (e.data?.type === '__activate_edit_mode')   setTweaksOpen(true);
+          if (e.data?.type === '__deactivate_edit_mode') setTweaksOpen(false);
+        });
+        window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+      }, []);
+
+      const goPage = (p) => { setPage(p); setSection('public'); window.scrollTo(0,0); };
+      window.__setPage = goPage;
+      const goPortal = () => { setSection('portal'); setUser(null); };
+      const handleLogin  = (u) => { setUser(u); };
+      const handleLogout = ()  => { setUser(null); setSection('public'); setPage('home'); };
+
+      return (
+        <div>
+          {/* Public site */}
+          {section === 'public' && (
+            <>
+              <PublicNav page={page} setPage={goPage} onPortal={goPortal} />
+              {page === 'home'      && <HomePage      setPage={goPage} />}
+              {page === 'cats'      && <CatsPage      />}
+              {page === 'volunteer' && <VolunteerPage />}
+              {page === 'donate'    && <DonatePage />}
+            </>
+          )}
+
+          {/* Portal – login */}
+          {section === 'portal' && !user && (
+            <div>
+              <button onClick={()=>setSection('public')} style={{ position:'fixed', top:16, left:16, zIndex:50, padding:'7px 14px', background:'rgba(255,255,255,0.08)', border:'1px solid rgba(255,255,255,0.15)', borderRadius:6, fontSize:13, color:'rgba(255,255,255,0.7)', cursor:'pointer', fontFamily:"'Inter',sans-serif" }}>
+                ← Back to site
+              </button>
+              <SBLogin onLogin={handleLogin} />
+            </div>
+          )}
+
+          {/* Portal – volunteer */}
+          {section === 'portal' && user?.role === 'volunteer' && (
+            <SBFeedingLog user={user} />
+          )}
+
+          {/* Portal – admin */}
+          {section === 'portal' && user?.role === 'admin' && (
+            <SBAdminDashboard user={user} />
+          )}
+
+          {/* Tweaks panel */}
+          {tweaksOpen && (
+            <div style={{ position:'fixed', bottom:24, right:24, background:'#fff', border:'1px solid #E6E4E0', borderRadius:12, padding:'22px 24px', width:280, boxShadow:'0 12px 48px rgba(0,0,0,0.12)', zIndex:9999, fontFamily:"'Inter',sans-serif" }}>
+              <div style={{ display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:20 }}>
+                <span style={{ fontFamily:"'Space Grotesk',sans-serif", fontWeight:700, fontSize:14, color:'#0F0F0E' }}>Tweaks</span>
+                <button onClick={()=>{ setTweaksOpen(false); window.parent.postMessage({type:'__edit_mode_dismissed'},'*'); }} style={{ background:'none', border:'none', cursor:'pointer', fontSize:20, color:'#74726E', lineHeight:1, padding:0 }}>×</button>
+              </div>
+
+              <div style={{ marginBottom:18 }}>
+                <div style={{ fontSize:11, fontWeight:700, color:'#74726E', textTransform:'uppercase', letterSpacing:1, marginBottom:10 }}>Navigate to</div>
+                <div style={{ display:'flex', flexWrap:'wrap', gap:6 }}>
+                  {['home','cats','volunteer','donate'].map(p => (
+                    <button key={p} onClick={()=>goPage(p)} style={{ padding:'6px 12px', borderRadius:14, border:'1px solid #E6E4E0', background: page===p && section==='public' ? '#0F0F0E' : '#FAFAF8', color: page===p && section==='public' ? '#fff' : '#74726E', fontSize:12, cursor:'pointer', textTransform:'capitalize', fontFamily:"'Inter',sans-serif" }}>{p}</button>
+                  ))}
+                </div>
+              </div>
+
+              <div style={{ marginBottom:18 }}>
+                <div style={{ fontSize:11, fontWeight:700, color:'#74726E', textTransform:'uppercase', letterSpacing:1, marginBottom:10 }}>Portal preview</div>
+                <div style={{ display:'flex', gap:6 }}>
+                  {[
+                    { label:'Login',     action:()=>{ setSection('portal'); setUser(null); } },
+                    { label:'Volunteer', action:()=>{ setSection('portal'); setUser({name:'Maria',role:'volunteer'}); } },
+                    { label:'Admin',     action:()=>{ setSection('portal'); setUser({name:'Admin',role:'admin'}); } },
+                  ].map(b => (
+                    <button key={b.label} onClick={b.action} style={{ flex:1, padding:'7px 0', borderRadius:6, border:'1px solid #E6E4E0', background:'#FAFAF8', color:'#0F0F0E', fontSize:11, cursor:'pointer', fontWeight:600 }}>{b.label}</button>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <div style={{ fontSize:11, fontWeight:700, color:'#74726E', textTransform:'uppercase', letterSpacing:1, marginBottom:10 }}>Gold Accent</div>
+                <div style={{ display:'flex', gap:8 }}>
+                  {['#E8B84B','#D97B4A','#6AAF8B','#6A8FD4','#B07ACC'].map(c => (
+                    <div key={c} onClick={()=>window.parent.postMessage({type:'__edit_mode_set_keys',edits:{goldAccent:c}},'*')} style={{ width:26, height:26, borderRadius:'50%', background:c, cursor:'pointer', border:'2.5px solid transparent', outline:'2px solid transparent' }}/>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+  </script>
+</body>
+</html>
