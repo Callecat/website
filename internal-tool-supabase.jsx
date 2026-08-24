@@ -60,8 +60,8 @@ function SBLogin({ onLogin }) {
   );
 
   return (
-    <div style={{ minHeight:'100vh', background:S.ink, display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'Inter',sans-serif" }}>
-      <div style={{ background:'#fff', borderRadius:8, padding:'52px 48px', width:420, boxShadow:'0 24px 80px rgba(0,0,0,0.35)' }}>
+    <div style={{ minHeight:'100vh', background:S.ink, display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'Inter',sans-serif", padding:20, boxSizing:'border-box' }}>
+      <div style={{ background:'#fff', borderRadius:8, padding:'52px 48px', width:'100%', maxWidth:420, boxSizing:'border-box', boxShadow:'0 24px 80px rgba(0,0,0,0.35)' }}>
         <div style={{ textAlign:'center', marginBottom:36 }}>
           <img src="uploads/logo.png" alt="Calle de Luna" style={{ height:68, width:'auto', marginBottom:8 }}/>
           <p style={{ fontSize:11, fontWeight:700, letterSpacing:3, color:S.muted, textTransform:'uppercase', margin:0 }}>Volunteer Portal</p>
@@ -181,7 +181,7 @@ function SBFeedingLog({ user }) {
           )}
 
           <form onSubmit={submit}>
-            <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:14, marginBottom:16 }}>
+            <div className="cdl-grid-2" style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:14, marginBottom:16 }}>
               <div><label style={slbl}>Date</label><input type="date" value={form.date} onChange={e=>up('date',e.target.value)} style={sfld}/></div>
               <div><label style={slbl}>Time</label><input type="time" value={form.time} onChange={e=>up('time',e.target.value)} style={sfld}/></div>
             </div>
@@ -282,7 +282,7 @@ function SBAdminDashboard({ user }) {
       <div style={{ maxWidth:1000, margin:'0 auto', padding:'36px 24px' }}>
 
         {/* Stats */}
-        <div style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:12, marginBottom:28 }}>
+        <div className="cdl-grid-4" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', gap:12, marginBottom:28 }}>
           {stats.map(s => (
             <div key={s.label} style={{ background:'#fff', borderRadius:6, padding:'22px 24px', border:`1px solid ${S.border}` }}>
               <div style={{ fontFamily:"'DM Serif Display',serif", fontSize:34, color:S.ink, lineHeight:1 }}>{s.value}</div>
@@ -292,9 +292,9 @@ function SBAdminDashboard({ user }) {
         </div>
 
         {/* Tabs */}
-        <div style={{ display:'flex', borderBottom:`1.5px solid ${S.border}`, marginBottom:0 }}>
+        <div style={{ display:'flex', borderBottom:`1.5px solid ${S.border}`, marginBottom:0, overflowX:'auto' }}>
           {['overview','all logs','by volunteer','by station'].map(t => (
-            <button key={t} onClick={()=>setTab(t)} style={{ padding:'9px 20px', border:'none', background:'transparent', color: tab===t ? S.ink : S.muted, fontWeight: tab===t ? 700 : 400, fontSize:13, cursor:'pointer', textTransform:'capitalize', borderBottom:`2px solid ${tab===t ? S.ink : 'transparent'}`, marginBottom:-1.5, fontFamily:"'Inter',sans-serif" }}>{t}</button>
+            <button key={t} onClick={()=>setTab(t)} style={{ padding:'9px 20px', border:'none', background:'transparent', color: tab===t ? S.ink : S.muted, fontWeight: tab===t ? 700 : 400, fontSize:13, cursor:'pointer', textTransform:'capitalize', borderBottom:`2px solid ${tab===t ? S.ink : 'transparent'}`, marginBottom:-1.5, fontFamily:"'Inter',sans-serif", whiteSpace:'nowrap', flexShrink:0 }}>{t}</button>
           ))}
         </div>
 
