@@ -280,7 +280,7 @@ const PARTNER_SHELTERS = [
 ];
 
 function catStatusColors(status) {
-  if (status === 'Looking for a Home') return { bg:'#EDFAED', fg:'#2A6A2A' };
+  if (status === 'Available') return { bg:'#EDFAED', fg:'#2A6A2A' };
   if (status === 'Adopted')            return { bg:'#FDEDF3', fg:'#A83B63' };
   return { bg:'#FEF8E6', fg:'#8A6020' }; // e.g. In Training
 }
