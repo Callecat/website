@@ -198,7 +198,7 @@ function HomePage({ setPage }) {
               No cat left hungry. No colony left unmanaged.
             </p>
             <p style={{ fontSize:15, color:A.muted, lineHeight:1.85, margin:'0 0 18px' }}>
-              Calle de Luna started in 2016 when neighbors noticed stray cats struggling on the streets. What began as informal feeding rounds grew into a coordinated rescue network.
+              Calle de Luna started in 2016 when neighbors noticed community cats struggling on the streets. What began as informal feeding rounds grew into a coordinated rescue network.
             </p>
             <p style={{ fontSize:15, color:A.muted, lineHeight:1.85, margin:'0 0 32px' }}>
               Today we run five feeding stations, coordinate weekly vet checks, and maintain an active network of foster families.
@@ -256,7 +256,7 @@ function HomePage({ setPage }) {
           </div>
           <div className="cdl-grid-4" style={{ display:'grid', gridTemplateColumns:'repeat(4,1fr)', borderTop:'none' }}>
             {cats.map((cat, i) => (
-              <div key={cat.id} className="cdl-border-r cdl-border-b-mobile" style={{ borderRight: i < 3 ? `1px solid ${A.border}` : 'none' }}>
+              <div key={cat.id} className="cdl-border-r cdl-border-b-mobile" style={{ borderRight: i < 3 ? `1px solid ${A.border}` : 'none', minWidth:0 }}>
                 <CatCard cat={cat} index={i}/>
               </div>
             ))}

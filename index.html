@@ -99,8 +99,8 @@
     ];
   </script>
 
-  <script type="text/babel" src="public-site-v2.jsx?v=20260824p"></script>
-  <script type="text/babel" src="internal-tool-supabase.jsx?v=20260824p"></script>
+  <script type="text/babel" src="public-site-v2.jsx?v=20260824r"></script>
+  <script type="text/babel" src="internal-tool-supabase.jsx?v=20260824r"></script>
 
   <script type="text/babel">
     const { useState, useEffect } = React;
@@ -125,11 +125,25 @@
       }, []);
 
       const [selectedCatId, setSelectedCatId] = useState(null);
-      const goPage = (p) => { setPage(p); setSection('public'); window.scrollTo(0,0); };
+
+      useEffect(() => {
+        history.replaceState({ page:'home', section:'public' }, '', '#home');
+        const onPopState = (e) => {
+          const s = e.state || { page:'home', section:'public' };
+          setSection(s.section || 'public');
+          setPage(s.page || 'home');
+          if (s.catId != null) setSelectedCatId(s.catId);
+          window.scrollTo(0,0);
+        };
+        window.addEventListener('popstate', onPopState);
+        return () => window.removeEventListener('popstate', onPopState);
+      }, []);
+
+      const goPage = (p) => { setPage(p); setSection('public'); window.scrollTo(0,0); history.pushState({ page:p, section:'public' }, '', '#'+p); };
       window.__setPage = goPage;
-      const goCat = (id) => { setSelectedCatId(id); setPage('cat-detail'); setSection('public'); window.scrollTo(0,0); };
+      const goCat = (id) => { setSelectedCatId(id); setPage('cat-detail'); setSection('public'); window.scrollTo(0,0); history.pushState({ page:'cat-detail', section:'public', catId:id }, '', '#cat-'+id); };
       window.__goCat = goCat;
-      const goPortal = () => { setSection('portal'); setUser(null); };
+      const goPortal = () => { setSection('portal'); setUser(null); history.pushState({ page:'home', section:'portal' }, '', '#portal'); };
       const handleLogin  = (u) => { setUser(u); };
       const handleLogout = ()  => { setUser(null); setSection('public'); setPage('home'); };
 
