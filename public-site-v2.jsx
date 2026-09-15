@@ -156,7 +156,7 @@ function HomePage({ setPage }) {
               that needs you.
             </h1>
             <p style={{ fontSize:15, color:A.muted, lineHeight:1.85, maxWidth:400, margin:'0 0 40px' }}>
-              We connect people to rescue, foster, and adopt cats in our community. Over 300 cats helped since 2016 — through a network of dedicated volunteers.
+              We connect people to rescue, foster, and adopt cats in our community. Over 200 cats helped since 2016 — through a network of dedicated volunteers.
             </p>
             <div style={{ display:'flex', gap:10, flexWrap:'wrap' }}>
               <button onClick={()=>setPage('volunteer')} style={{ padding:'13px 24px', background:A.ink, color:'#fff', border:'none', borderRadius:4, fontSize:13, fontWeight:600, cursor:'pointer', fontFamily:"'Inter',sans-serif" }}>Become a volunteer</button>
@@ -169,7 +169,7 @@ function HomePage({ setPage }) {
               <img src="uploads/home-hero-1.jpg" style={{ width:'100%', height:'100%', objectFit:'cover', display:'block' }} alt="cat"/>
             </div>
             <div style={{ aspectRatio:'1/1', borderLeft:`1px solid ${A.border}`, borderBottom:`1px solid ${A.border}`, background:A.bgSoft, display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', gap:4 }}>
-              <div style={{ fontFamily:"'DM Serif Display',serif", fontSize:56, color:A.ink, lineHeight:1 }}>300+</div>
+              <div style={{ fontFamily:"'DM Serif Display',serif", fontSize:56, color:A.ink, lineHeight:1 }}>200+</div>
               <div style={{ fontSize:10, color:A.muted, letterSpacing:3, textTransform:'uppercase' }}>Cats Rescued</div>
             </div>
             <div style={{ aspectRatio:'1/1', background:A.ink, display:'flex', alignItems:'center', justifyContent:'center', flexDirection:'column', gap:4 }}>
