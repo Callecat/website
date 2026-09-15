@@ -201,13 +201,13 @@ function HomePage({ setPage }) {
               Calle de Luna started in 2016 when neighbors noticed community cats struggling on the streets. What began as informal feeding rounds grew into a coordinated rescue network.
             </p>
             <p style={{ fontSize:15, color:A.muted, lineHeight:1.85, margin:'0 0 32px' }}>
-              Today we run five feeding stations, coordinate weekly vet checks, and maintain an active network of foster families.
+              Today we run five feeding stations, monitor cats daily for illness and injury, and maintain an active network of foster families.
             </p>
             <div style={{ display:'grid', gridTemplateColumns:'1fr 1fr', gap:24, paddingTop:24, borderTop:`1px solid ${A.border}` }}>
               {[
                 { n:'5', label:'Feeding Stations' },
                 { n:'2016', label:'Year Founded' },
-                { n:'Weekly', label:'Vet Check-ups' },
+                { n:'Daily', label:'Monitoring for illness and injury' },
                 { n:'Active', label:'Foster Network' },
               ].map(s => (
                 <div key={s.label}>
